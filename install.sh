@@ -27,5 +27,7 @@ docker run -it --name zmon-demo-bootstrap \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /usr/bin/docker:/usr/bin/docker \
     --net zmon-demo \
+    -e "ZMON_OAUTH2_SSO_CLIENT_ID=${ZMON_OAUTH2_SSO_CLIENT_ID}" \
+    -e "ZMON_OAUTH2_SSO_CLIENT_SECRET=${ZMON_OAUTH2_SSO_CLIENT_SECRET}" \
     zmon-demo-bootstrap \
     /workdir/bootstrap/bootstrap.sh
