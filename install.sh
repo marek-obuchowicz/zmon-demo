@@ -21,9 +21,13 @@ fi
 docker network create --driver bridge zmon-demo
 
 docker rm -f zmon-demo-bootstrap
+docker build -t zmon-demo-bootstrap
 docker run -it --name zmon-demo-bootstrap \
     -v $(pwd):/workdir \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /usr/bin/docker:/usr/bin/docker \
     --net zmon-demo \
-    registry.opensource.zalan.do/stups/zmon-demo-bootstrap:cd20 /workdir/bootstrap/bootstrap.sh
+    -e "ZMON_OAUTH2_SSO_CLIENT_ID=${ZMON_OAUTH2_SSO_CLIENT_ID}" \
+    -e "ZMON_OAUTH2_SSO_CLIENT_SECRET=${ZMON_OAUTH2_SSO_CLIENT_SECRET}" \
+    zmon-demo-bootstrap
+#    registry.opensource.zalan.do/stups/zmon-demo-bootstrap:cd20 /workdir/bootstrap/bootstrap.sh
